@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta Semântica HSL — Primária Preto Elegante (#0F172A) & Secundária Branco Gelo (#F8FAFC) */
+  --background: 210 40% 98%;          /* #F8FAFC Branco Gelo */
+  --foreground: 222 47% 11%;          /* #0F172A Preto Elegante */
+  --surface: 210 33% 96%;             /* #F1F5F9 Superfície Estrutural */
+  --surface-elevated: 210 40% 99%;    /* Elevação sutil sobre o canvas */
+  --primary: 222 47% 11%;             /* #0F172A Preto Elegante */
+  --primary-foreground: 210 40% 98%;  /* #F8FAFC Branco Gelo */
+  --secondary: 215 25% 27%;           /* Ardósia Arquitetônica */
+  --secondary-foreground: 210 40% 98%;
+  --muted: 214 32% 91%;
+  --muted-foreground: 215 19% 35%;    /* Contraste WCAG AA > 7:1 em fundo claro */
+  --accent: 33 28% 43%;               /* Bronze / Madeira Freijó discreta */
+  --accent-foreground: 210 40% 98%;
+  --border: 214 26% 85%;              /* Linha hairline 1px */
+  --border-strong: 222 32% 24%;       /* Linha hairline em superfícies escuras */
+  --ring: 222 47% 11%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 210 40% 98%;
+
+  /* Tokens de Gradiente e Sombra */
+  --gradient-architectural: linear-gradient(
+    180deg,
+    hsl(210 40% 98%) 0%,
+    hsl(210 33% 95%) 100%
+  );
+  --gradient-obsidian: linear-gradient(
+    145deg,
+    hsl(222 47% 11%) 0%,
+    hsl(222 42% 15%) 100%
+  );
+  --shadow-architectural: 0 12px 32px -12px hsl(222 47% 11% / 0.08),
+    0 2px 6px -1px hsl(222 47% 11% / 0.04);
+  --shadow-elevated: 0 24px 48px -16px hsl(222 47% 11% / 0.14),
+    0 6px 16px -4px hsl(222 47% 11% / 0.06);
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-surface: hsl(var(--surface));
+  --color-surface-elevated: hsl(var(--surface-elevated));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-ring: hsl(var(--ring));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Lato", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+/* Textura sutil de papel mineral / grão arquitetônico */
+.bg-architectural-grain {
+  background-image: var(--gradient-architectural);
+  position: relative;
+}
+
+.bg-obsidian-surface {
+  background-image: var(--gradient-obsidian);
+}
+
+.shadow-architectural {
+  box-shadow: var(--shadow-architectural);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Pulse discreto exclusivo para o botão flutuante de WhatsApp */
+@keyframes whatsapp-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70% {
+    transform: scale(1.38);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.38);
+    opacity: 0;
+  }
+}
+
+.whatsapp-ring-pulse {
+  animation: whatsapp-pulse 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .whatsapp-ring-pulse {
+    animation: none;
+  }
+}
